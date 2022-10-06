@@ -17,7 +17,7 @@ from binascii import unhexlify
 
 
 def hex_to_b64(hex_str: bytes) -> bytes:
-    raw = unhexlify(instr)
+    raw = unhexlify(hex_str)
     return b64encode(raw)
 
 
