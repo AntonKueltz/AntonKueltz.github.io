@@ -8,7 +8,7 @@ You'll find posts of varying (dubious?) quality here that implement
 (usually in python) topics from cryptography.
 
 This site was made with jekyll. More information is available at the
-rsources below.
+resources below.
 
 [jekyll org](https://github.com/jekyll) <br />
 [jekyll source](https://github.com/jekyll/jekyll) <br />
