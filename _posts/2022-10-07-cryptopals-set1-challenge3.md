@@ -26,8 +26,8 @@ score the resulting candidate plaintext and, if the score is a new high score, w
 that key as the best guess for the true key.
 
 Technically we already know the plaintext when we find the key and can just return that
-along with the key, but for future problems an interface that returns only the key is a bit 
-cleaner. Plus the extra decryption operation doesn't change our runtime complexity, the
+along with the key, but for future problems an interface that returns only the key is 
+handier. Plus the extra decryption operation doesn't change our runtime complexity, the
 core of the computational complexity here is in the brute force attack which is O(2^n),
 where n is the size of the key in bits.
 
@@ -61,12 +61,16 @@ def find_single_byte_key(ctxt: bytes) -> int:
     return best_key
 
 
+def single_byte_cipher(ctxt: bytes) -> bytes:
+    key = find_single_byte_key(ctxt)
+    return bytes(map(lambda c: key ^ c, ctxt))
+
+
 def challenge03():
     ctxt = unhexlify(
         b'1b37373331363f78151b7f2b783431333d'
         b'78397828372d363c78373e783a393b3736'
     )
-    key = find_single_byte_key(ctxt)
-    ptxt = bytes(map(lambda c: key ^ c, ctxt))
+    ptxt = single_byte_cipher(ctxt)
     print(ptxt)
 ```
