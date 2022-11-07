@@ -136,7 +136,7 @@ def break_repeating_key(data: bytes) -> bytes:
 
 
 def challenge06():
-    with open('Data/6.txt', 'rb') as f:
+    with open('6.txt', 'rb') as f:
         data = b64decode(f.read().replace(b'\n', b''))
         print(break_repeating_key(data))
 ```

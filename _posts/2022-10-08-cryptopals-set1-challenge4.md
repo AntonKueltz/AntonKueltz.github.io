@@ -26,7 +26,7 @@ from challenge03 import score, single_byte_cipher
 
 
 def challenge04():
-    with open('Data/4.txt', 'rb') as f:
+    with open('4.txt', 'rb') as f:
         high_score = 0
         ptxt = None
 

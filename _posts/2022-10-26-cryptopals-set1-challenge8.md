@@ -35,7 +35,7 @@ def is_encrypted_in_ecb_mode(ctxt: bytes) -> bool:
 
 
 def challenge08():
-    with open('Data/8.txt', 'rb') as f:
+    with open('8.txt', 'rb') as f:
         ctxts = [unhexlify(txt) for txt in f.read().split(b'\n')]
 
     for ctxt in ctxts:

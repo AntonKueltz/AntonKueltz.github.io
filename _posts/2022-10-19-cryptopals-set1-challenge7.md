@@ -54,7 +54,7 @@ def aes_ecb_decrypt(ctxt: bytes, key: bytes) -> bytes:
 def challenge07():
     key = b'YELLOW SUBMARINE'
 
-    with open('Data/7.txt', 'rb') as f:
+    with open('7.txt', 'rb') as f:
         data = b64decode(f.read().replace(b'\n', b''))
         print(aes_ecb_decrypt(data, key))
 ```
