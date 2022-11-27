@@ -10,7 +10,11 @@ attacks. In this challenge we are tasked with
 [breaking an ECB encrypted ciphertext](https://cryptopals.com/sets/2/challenges/12)
 one byte at a time. This challenge is probably complex enough that rather than throwing
 a whole solution onto the end, as in previous challenges, we're going to write out
-functions step by step as we go. The first component we need is an oracle that takes
+functions step by step as we go.
+
+# Preliminaries and Groundwork
+
+The first component we need is an oracle that takes
 a byte sequence of our choosing, appends a constant byte sequence to the end, and
 encrypts those bytes under a constant key. Since we've got some state (the key and the
 appended byte sequence) to manage we'll use a class to encapsulate this.
@@ -73,6 +77,8 @@ AAAAAAA? ???????? ...
 ^^^^^^^
 prefix
 ```
+
+# Recovering A Single Byte
 
 How is this prefix useful? It allows us to control the size of the search space. If an entire
 block is unknown then there are `2^(8 * b)` possible values that the block could have (where `b`
@@ -142,6 +148,8 @@ In [1]: from challenge12 import recover_byte
 In [2]: recover_byte()
 Out[2]: b's'
 ```
+
+# Extending to Multiple Bytes and Blocks
 
 With the meat of the problem out of the way the rest of this problem takes us a bit out
 of the realm of purely cryptanalysis and into the realm of writing good control flow as well.
@@ -316,13 +324,55 @@ In [2]: recover_appended_message()
 Out[2]: b'secret message, do not distribute'
 ```
 
+# Optimizations
+
+With a functional implementation under our belt we can now turn to optimizing a bit. We can't
+do much better on the time complexity front since we're going to have to brute force each byte,
+but we can improve space complexity. Note that for each round recovering a byte requires us
+to build a map of all possible encryptions of the unknown byte. We don't actually need this map.
+Instead of the map we can just check for the right ciphertext block as we are generating the
+ciphertexts that are the keys of the map, making it unnecessary to maintain a map at all. This
+reduces our space complexity quite a bit each round since the map is the only data structure we
+maintain. In big O terms we have reduced the space needed from `O(2^8 * n) = O(n)` to `O(1)` 
+(where `n` is the length of the byte sequence we are recovering and the constant factor accounts
+for the size of the search space). In theory (aka big O terms) the time complexity is still the
+same, but in practice it will be faster (unless the unknown byte is always `b'\xff'`) since we
+can short circuit once we find the match.
+
+```python
+def recover_byte(prefix: bytes, target_block: bytes) -> bytes:
+    block_size = len(prefix) + 1  # operate under assumption that only 1 byte is unknown
+
+    for byte_as_int in range(0x100):
+        byte = byte_as_int.to_bytes(1, byteorder="little")
+        guess = prefix + byte
+
+        ciphertext = oracle.encrypt(guess)
+        first_block = ciphertext[:block_size]
+        
+        if first_block == target_block:
+            return byte
+    
+    raise ValueError(
+        f"Could not recover byte with prefix {prefix} and target block {target_block}"
+    )
+```
+
+We then update `recover_appended_message` to use this new function to recover bytes.
+
+```diff
+- lookup = build_lookup_table(lookup_prefix)
+- known_bytes += lookup[target_ciphertext_block]
++ known_bytes += recover_byte(lookup_prefix, target_ciphertext_block)
+```
+
 With that our attack is complete. The full implementation can be found below.
 
 ```python
 from base64 import b64decode
 from os import urandom
-from typing import Dict
 
+from challenge08 import is_encrypted_in_ecb_mode
 from challenge11 import aes_ecb_encrypt
 
 oracle = None
@@ -338,7 +388,7 @@ class EncryptionOracle:
 
 
 def detect_block_size() -> int:
-    data = b''
+    data = b'A'
     initial_len = cur_len = len(oracle.encrypt(data))
 
     while cur_len == initial_len:
@@ -360,9 +410,8 @@ def detect_appended_bytes_length() -> int:
     return initial_len - padding_bytes
 
 
-def build_lookup_table(prefix: bytes) -> Dict[bytes, bytes]:
+def recover_byte(prefix: bytes, target_block: bytes) -> bytes:
     block_size = len(prefix) + 1  # operate under assumption that only 1 byte is unknown
-    lookup = {}
 
     for byte_as_int in range(0x100):
         byte = byte_as_int.to_bytes(1, byteorder="little")
@@ -370,9 +419,13 @@ def build_lookup_table(prefix: bytes) -> Dict[bytes, bytes]:
 
         ciphertext = oracle.encrypt(guess)
         first_block = ciphertext[:block_size]
-        lookup[first_block] = byte
+        
+        if first_block == target_block:
+            return byte
     
-    return lookup
+    raise ValueError(
+        f"Could not recover byte with prefix {prefix} and target block {target_block}"
+    )
 
 
 def recover_appended_message() -> bytes:
@@ -397,8 +450,7 @@ def recover_appended_message() -> bytes:
         else:
             lookup_prefix = known_bytes[-(block_size - 1):]
 
-        lookup = build_lookup_table(lookup_prefix)
-        known_bytes += lookup[target_ciphertext_block]
+        known_bytes += recover_byte(lookup_prefix, target_ciphertext_block)
 
         if len(known_bytes) % block_size == 0:
             current_block += 1
