@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Cryptopals Set 1, Challenge 7"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 In [this challenge](https://cryptopals.com/sets/1/challenges/7)

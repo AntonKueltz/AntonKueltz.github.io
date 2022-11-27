@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Cryptopals Set 2, Challenge 11"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 Having now got ECB mode and CBC mode under our belt, we are

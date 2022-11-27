@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Cryptopals Set 1, Challenge 4"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 For this challenge we are [tasked with building on top of challenge 3 and

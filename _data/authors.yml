@@ -1,0 +1,7 @@
+Anton Kueltz:
+  name: Anton Kueltz
+  picture: /images/rainier.png
+  links:
+    - title: GitHub
+      url: https://github.com/AntonKueltz
+      icon: fab fa-github

@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Cryptopals Set 1, Challenge 6"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 This challenges greets us with "It is officially on, now.". Indeed, in this 

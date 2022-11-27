@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Cryptopals Set 1, Challenge 3"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 Finally some code breaking! We are [tasked with deciphering some data that

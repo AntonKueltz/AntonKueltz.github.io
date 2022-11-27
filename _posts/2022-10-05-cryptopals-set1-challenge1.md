@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Cryptopals Set 1, Challenge 1"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 To start we are [tasked with decoding some hex data and encoding the

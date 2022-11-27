@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "Forging Tags for Data Encrypted in OCB2 Mode"
+author: Anton Kueltz
+tag: practical-exploit
 ---
 
 OCB is a block cipher mode of operation, though a bit more esoteric when compared to

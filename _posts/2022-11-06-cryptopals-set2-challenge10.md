@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Cryptopals Set 2, Challenge 10"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 In this challenge we are tasked with [implementing CBC mode decryption](https://cryptopals.com/sets/2/challenges/10).

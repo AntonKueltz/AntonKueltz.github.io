@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Cryptopals Set 1, Challenge 8"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 In the final challenge of set 1 

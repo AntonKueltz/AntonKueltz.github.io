@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Hey, What's The Deal With All These Cryptopals Posts?"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 Great question. I did these challenges about a decade ago while I was first

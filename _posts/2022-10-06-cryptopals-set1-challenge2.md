@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Cryptopals Set 1, Challenge 2"
+author: Anton Kueltz
+tag: cryptopals
 ---
 
 In this second challenge we are [tasked with computing the XOR of two
