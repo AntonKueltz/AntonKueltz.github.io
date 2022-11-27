@@ -13,7 +13,7 @@ a whole solution onto the end, as in previous challenges, we're going to write o
 functions step by step as we go. The first component we need is an oracle that takes
 a byte sequence of our choosing, appends a constant byte sequence to the end, and
 encrypts those bytes under a constant key. Since we've got some state (the key and the
-appended byte sequence) to manage we'll use a class encapsulate this.
+appended byte sequence) to manage we'll use a class to encapsulate this.
 
 ```python
 from os import urandom
@@ -50,7 +50,7 @@ oracle = EncryptionOracle(b'')  # we'll make this the actual appended bytes late
 
 
 def detect_block_size() -> int:
-    data = b'A'
+    data = b''
     initial_len = cur_len = len(oracle.encrypt(data))
 
     while cur_len == initial_len:
@@ -79,7 +79,7 @@ block is unknown then there are `2^(8 * b)` possible values that the block could
 is the length of the block in bytes). On the other hand, if the first `b-1` bytes are known then
 the search space is `2^8`. We can easily brute force that search space. So, say we get back a
 ciphertext where for the first input block we knew all the bytes except for one. We can then craft
-`2^8` prefixes that are the original prefix of `A` bytes plus a guess at the unknown byte.
+`2^8` guesses that are the original prefix of `A` bytes plus a guess at the unknown byte.
 
 ```python
 b'A...A\x00'
@@ -143,12 +143,12 @@ In [2]: recover_byte()
 Out[2]: b's'
 ```
 
-With the meat of the problem out of the way the rest of this problem is takes us a bit out
-of the realm of cryptanalysis and more into the realm of writing good control flow. The main
-questions to answer now become -
+With the meat of the problem out of the way the rest of this problem takes us a bit out
+of the realm of purely cryptanalysis and into the realm of writing good control flow as well.
+The remaining questions to answer are -
 
 1. How do we break the next bytes in the first block?
-1. How do we break the bytes in subsequent blocks?
+2. How do we break the bytes in subsequent blocks?
 
 The first question has a pretty straightforward answer - we incorporate the byte we just recovered
 into the next lookup table. So if e.g. we just recovered `b's'` then our new prefix becomes `b'A..A'` with
@@ -193,9 +193,10 @@ Out[2]: b'secret message, '
 ```
 
 Now all that's left is to extend this to multiple blocks. This gets a little tricky in that the `A` byte
-prefix is no longer a part of the lookup table prefix. Instead it's the `block_size - 1` bytes before the
-unknown byte that we use. There's also an edge when moving across block boundaries where we need to cycle
-the size of our prefix from 0 back to 15 in order to get a single unknown byte in the next block e.g. -
+prefix is no longer a part of the lookup table prefix after the first block is recovered.
+Instead it's the `block_size - 1` known bytes before the unknown byte that we use. There's also an edge when
+moving across block boundaries where we need to cycle the size of our prefix from 0 back to 15 in order
+to get a single unknown byte in the next block e.g. -
 
 ```
 |=== block1 ===| |=== block2 ===| |=== block3 ===|
@@ -280,8 +281,9 @@ AAAAAAAAsecret\x02\x02
 ^^^^ known ^^^????
 ```
 
-We have a mismatch in this case. We recovered the `b'\x01'` padding byte in the first case, but then in
-the second case that `b'\x01'` byte that we "know" is no longer valid since the padding is different. So
+We have a mismatch in this case. We recovered the `b'\x01'` padding byte in the seventh round, but then in
+the eighth round that `b'\x01'` byte that we "know" is no longer valid since the padding is different and
+our lookup fails as a result since we built a mapping based on a prefix that is not correct this round. So
 we need to figure out a way to recover the unpadded message length. We can do this in a similar way that
 we detected the block size. We pass the oracle input byte sequences that increase in size by one each
 iteration. Once the ciphertext size changes we know that the size of the byte sequence is how many
@@ -336,7 +338,7 @@ class EncryptionOracle:
 
 
 def detect_block_size() -> int:
-    data = b'A'
+    data = b''
     initial_len = cur_len = len(oracle.encrypt(data))
 
     while cur_len == initial_len:
@@ -415,5 +417,6 @@ def challenge12():
     )
     oracle = EncryptionOracle(appended)
 
+    assert is_encrypted_in_ecb_mode(oracle.encrypt(b'A' * 100))
     print(recover_appended_message())
 ```
