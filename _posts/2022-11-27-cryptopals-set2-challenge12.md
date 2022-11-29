@@ -163,7 +163,7 @@ into the next lookup table. So if e.g. we just recovered `b's'` then our new pre
 one less `A`. Our lookup prefix then becomes the `A` bytes _plus_ the known bytes. In this way
 we can recover the entire first block. The trick is that we always want to have exactly one unknown byte
 in the block and that we want to keep incorporating the bytes we recover into our next lookup table.
-Note that how we construct the lookup is adaptive and that we enclose the things in a loop, but that the
+Note that how we construct the lookup is adaptive and that we enclose things in a loop, but that the
 core of the attack is not changed.
 
 ```
@@ -202,7 +202,7 @@ Out[2]: b'secret message, '
 
 Now all that's left is to extend this to multiple blocks. This gets a little tricky in that the `A` byte
 prefix is no longer a part of the lookup table prefix after the first block is recovered.
-Instead it's the `block_size - 1` known bytes before the unknown byte that we use. There's also an edge when
+Instead it's the `block_size - 1` known bytes before the unknown byte that we use. There's also an edge case when
 moving across block boundaries where we need to cycle the size of our prefix from 0 back to 15 in order
 to get a single unknown byte in the next block e.g. -
 
