@@ -14,6 +14,8 @@ isn't enough. You have to combine and apply them correctly too in order to have 
 system. Even big, respected TLS implementations like openSSL have learned this the hard
 way.
 
+# Preliminaries
+
 Anyway, let's flip some bits for fun and profit. Before we do that we have a couple
 preliminaries we need to set up again to act as the canvas upon which we will paint our
 attack. The first function we need to write is one which takes some bytes that we provide
@@ -69,6 +71,8 @@ In [2]: is_admin(encrypted)
 Out[2]: False
 ```
 
+# The Bitflipping Attack
+
 Luckily for us the integrity of the ciphertext is not verified and we are free to modify it as we like before
 sending it to the `is_admin` function. This is where the bitflipping comes into play. Recall that encryption in
 CBC mode, applied to the input we have in this problem, looks something like this -
@@ -104,7 +108,7 @@ Decryption is then as follows -
 Let's use some terms to keeps things consistent and say that `P0` is the first plaintext
 block and `C0` is the first ciphertext block (with `P1` and `C1` being the second block and
 so on). We'll also say that `A` is the input block of the plaintext that we control and that
-`T` is the target block that we want to have as part of the decrypted output. In the decrpytion
+`T` is the target block that we want to have as part of the decrypted output. In the decryption
 process we know that `P2 = A`, which means we also can determine the output of `AES(C2)`,
 the AES decryption call, before the `XOR` is applied -
 
