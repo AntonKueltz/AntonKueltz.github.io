@@ -35,8 +35,12 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
 
+# pagination
 paginate: 10  # amount of posts to show per page
 paginate_path: /page:num/
+
+# appearance
+skin: "/assets/css/skins/dark.css"
 
 # Exclude from processing.
 # The following items will not be processed, by default.

@@ -12,9 +12,14 @@ CBC mode might already sound familiar. It helps us avoid some of the issues that
 nature of ECB mode brings with it. The idea is to randomize the input to the cipher by first
 XOR-ing the plaintext block with the previous ciphertext block. If the cipher can be modeled
 as a pseudorandom function then each input to the cipher is pseudorandom since the input is the
-XOR of a plaintext block and the output of a pseudorandom function. For the more visually inclined,
-[Wikipedia](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC))
- has a nice diagram of this process. ![CBC Mode Encryption](https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/CBC_encryption.svg/900px-CBC_encryption.svg.png) The decryption process is the reverse of this with the main "gotcha"
+XOR of a plaintext block and the output of a pseudorandom function.
+
+For the more visually inclined, [Wikipedia](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC))
+has a nice diagram of this process.
+ 
+ ![CBC Mode Encryption](https://upload.wikimedia.org/wikipedia/commons/d/d3/Cbc_encryption.png)
+ 
+ The decryption process is the reverse of this with the main "gotcha"
  being that we first apply the block cipher to the ciphertext block and then XOR the previous
  ciphertext block to obtain the plaintext block.
 
