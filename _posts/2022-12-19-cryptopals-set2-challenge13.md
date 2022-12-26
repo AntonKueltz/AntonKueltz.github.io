@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "Cryptopals Set 2, Challenge 13"
+title: "ECB Cut-and-paste"
+subtitle:  "Cryptopals Set 2, Challenge 13"
 author: Anton Kueltz
-tag: cryptopals
+tags: ["cryptopals", "practical-exploit"]
 ---
 
 In this challenge we [pick on poor ECB mode yet again](https://cryptopals.com/sets/2/challenges/13).

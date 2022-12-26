@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 1, Challenge 8"
+title: "Detect AES in ECB Mode"
+subtitle:  "Cryptopals Set 1, Challenge 8"
 author: Anton Kueltz
 tag: cryptopals
 ---

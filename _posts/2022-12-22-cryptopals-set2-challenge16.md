@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "Cryptopals Set 2, Challenge 16"
+title: "CBC Bitflipping Attacks"
+subtitle:  "Cryptopals Set 2, Challenge 16"
 author: Anton Kueltz
-tag: cryptopals
+tags: ["cryptopals", "practical-exploit"]
 ---
 
 In the final challenge of the second set we ease up on poor ECB mode and

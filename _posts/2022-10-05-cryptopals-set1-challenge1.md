@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 1, Challenge 1"
+title: "Convert Hex to Base64"
+subtitle:  "Cryptopals Set 1, Challenge 1"
 author: Anton Kueltz
 tag: cryptopals
 ---

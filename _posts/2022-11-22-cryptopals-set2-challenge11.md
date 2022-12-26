@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 2, Challenge 11"
+title: "An ECB/CBC Detection Oracle"
+subtitle:  "Cryptopals Set 2, Challenge 11"
 author: Anton Kueltz
 tag: cryptopals
 ---

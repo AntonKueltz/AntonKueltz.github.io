@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 2, Challenge 9"
+title: "Implement PKCS#7 Padding"
+subtitle:  "Cryptopals Set 2, Challenge 9"
 author: Anton Kueltz
 tag: cryptopals
 ---

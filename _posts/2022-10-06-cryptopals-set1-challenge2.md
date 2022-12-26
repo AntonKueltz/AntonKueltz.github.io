@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 1, Challenge 2"
+title: "Fixed XOR"
+subtitle:  "Cryptopals Set 1, Challenge 2"
 author: Anton Kueltz
 tag: cryptopals
 ---

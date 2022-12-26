@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 1, Challenge 4"
+title: "Detect Single-character XOR"
+subtitle:  "Cryptopals Set 1, Challenge 4"
 author: Anton Kueltz
 tag: cryptopals
 ---

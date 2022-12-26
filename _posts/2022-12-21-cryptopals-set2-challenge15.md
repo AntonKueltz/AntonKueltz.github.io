@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 2, Challenge 15"
+title: "PKCS#7 Padding Validation"
+subtitle:  "Cryptopals Set 2, Challenge 15"
 author: Anton Kueltz
 tag: cryptopals
 ---

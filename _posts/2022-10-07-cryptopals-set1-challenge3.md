@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 1, Challenge 3"
+title: "Single-byte XOR Cipher"
+subtitle:  "Cryptopals Set 1, Challenge 3"
 author: Anton Kueltz
 tag: cryptopals
 ---

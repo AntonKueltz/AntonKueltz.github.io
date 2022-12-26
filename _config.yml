@@ -35,9 +35,14 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
 
+permalink: /:title/
+
 # pagination
 paginate: 10  # amount of posts to show per page
 paginate_path: /page:num/
+
+# tags
+tag_archive_path: "/tags/"
 
 # appearance
 skin: "/assets/css/skins/dark.css"

@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "Cryptopals Set 2, Challenge 14"
+title: "Byte-at-a-time ECB Decryption (Harder)"
+subtitle:  "Cryptopals Set 2, Challenge 14"
 author: Anton Kueltz
-tag: cryptopals
+tags: ["cryptopals", "practical-exploit"]
 ---
 
 This challenge modifies challenge 12, so check out [that post](/2022/11/27/cryptopals-set2-challenge12.html)

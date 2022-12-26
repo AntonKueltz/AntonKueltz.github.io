@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "Cryptopals Set 3, Challenge 17"
+title:  "The CBC Padding Oracle"
+subtitle: "Cryptopals Set 3, Challenge 17"
 author: Anton Kueltz
-tag: cryptopals
+tags: ["cryptopals", "practical-exploit"]
 ---
 
 Welcome to set 3! We start this set with a stone cold _classic_ of an attack. What we have

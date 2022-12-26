@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "Cryptopals Set 2, Challenge 12"
+title: "Byte-at-a-time ECB Decryption (Simple)"
+subtitle:  "Cryptopals Set 2, Challenge 12"
 author: Anton Kueltz
-tag: cryptopals
+tags: ["cryptopals", "practical-exploit"]
 ---
 
 This is were things start to move from the realm of training wheels to practical

@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 2, Challenge 10"
+title: "Implement CBC Mode"
+subtitle:  "Cryptopals Set 2, Challenge 10"
 author: Anton Kueltz
 tag: cryptopals
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Cryptopals Set 1, Challenge 5"
+title: "Implement Repeating-key XOR"
+subtitle:  "Cryptopals Set 1, Challenge 5"
 author: Anton Kueltz
 tag: cryptopals
 ---
