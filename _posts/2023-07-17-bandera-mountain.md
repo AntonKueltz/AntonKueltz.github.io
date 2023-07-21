@@ -38,7 +38,7 @@ broke and I got some great rays breaking through from the West.
 ![image-title-here](/images/bandera-sunset-2.jpg){:class="img-responsive"}
 
 While descending through the trees on the way down, as dusk was falling, there was also quite a
-nice views of McClellan Butte, directly South across I-90, looking quite imposing with it's distinct
+nice view of McClellan Butte, directly South across I-90, looking quite imposing with it's distinct
 summit block.
 
 ![image-title-here](/images/bandera-mcclellan.jpg){:class="img-responsive"}
