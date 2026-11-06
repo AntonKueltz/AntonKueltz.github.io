@@ -1,4 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Cryptopals Set 1</title>
 </head>
 
@@ -39,6 +45,7 @@
     </li>
   </ul>
 
+<main>
   <h3 id="challenge-1">Challenge 1: Convert Hex to Base64</h3>
 
   <p>
@@ -468,7 +475,10 @@
     poorly encrypting images of penguins</a>.
   </p>
 
-  <img src="https://assets.buttondown.email/images/178d8e12-e061-4084-966a-57b92faa36f8.jpg" />
+  <img 
+    src="https://assets.buttondown.email/images/178d8e12-e061-4084-966a-57b92faa36f8.jpg"
+    alt="ECB Penguin"
+  />
 
   <p>
     This mode is quite simple, you take a block (128 bits in AES) of
@@ -479,7 +489,10 @@
     diagram</a> describing this mode if you're a visual learner.
   </p>
 
-  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/ECB_encryption.svg" />
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/d/d6/ECB_encryption.svg"
+    alt="ECB Encryption Diagram"
+  />
 
   <code>
     <pre>
@@ -626,5 +639,8 @@
     unlikely this scenario is we do not take it into consideration for our approach
     to identifying ciphertexts encrypted in ECB mode.
   </p>
+</main>
 
 </body>
+
+</html>
