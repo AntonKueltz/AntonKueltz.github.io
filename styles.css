@@ -1,0 +1,23 @@
+body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+pre {
+  background-color: #dfdfdf;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+img {
+  max-width: 1200px;
+}
+
+#toc li {
+  padding-bottom: 8px;
+}
+
+.centered {
+  margin: 0 auto;
+}

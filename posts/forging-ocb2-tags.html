@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="../styles.css">
+
   <title>Forging OCB2 Tags</title>
 </head>
 
@@ -68,8 +70,7 @@
     128 bits long.
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   from struct import pack
 
   BLOCKSIZE = 16  # bytes
@@ -81,8 +82,7 @@
           encoded += pack('B', datalen % 0x100)
           datalen //= 0x100
       return b'\x00' * (BLOCKSIZE - len(encoded)) + encoded
-    </code>
-  </pre>
+  </code></pre>
 
   <p>
     We are now ready to generate our inputs to the encryption function. Note that we do not
@@ -91,8 +91,7 @@
     we use an empty byte sequence.
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   from os import urandom
 
   BLOCKSIZE = 16  # bytes
@@ -101,8 +100,7 @@
   def generate_inputs() -> tuple[bytes, bytes]:
     m = encode_length(BLOCKSIZE * 8) + urandom(BLOCKSIZE)
     return m, b''
-    </code>
-  </pre>
+  </code></pre>
 
   <p>
     Now we need an encryption oracle that will encrypt our inputs and return the corresponding
@@ -111,8 +109,7 @@
     and defer to <a href="https://github.com/kravietz/pyOCB">pyOCB</a> for the heavy lifting.
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   from os import urandom
 
   from ocb.aes import AES
@@ -138,8 +135,7 @@
           self.ocb.setKey(self.k)
           self.ocb.setNonce(self.n)
           return self.ocb.decrypt(a, c, t)
-    </code>
-  </pre>
+  </code></pre>
 
   <h3>The Forgery</h3>
 
@@ -152,8 +148,7 @@
     <li>T' = M[1] XOR C[1]</li>
   </ul>
 
-  <pre>
-    <code>
+  <pre><code>
   BLOCKSIZE = 16  # bytes
 
 
@@ -165,8 +160,7 @@
       c_ = xor(c[:BLOCKSIZE], encode_length(BLOCKSIZE * 8))
       t_ = xor(m[BLOCKSIZE:], c[BLOCKSIZE:])
       return t_, c_
-    </code>
-  </pre>
+  </code></pre>
 
   <p>
     Putting this all together we now have our attack. If you'd like to run this code on your
@@ -195,8 +189,7 @@
 
   <h3>Full Implementation</h3>
 
-  <pre>
-    <code>
+  <pre><code>
   from binascii import hexlify
   from os import urandom
   from struct import pack
@@ -274,8 +267,7 @@
 
   if __name__ == '__main__':
       forge_tag()
-    </code>
-  </pre>
+  </code></pre>
 </main>
 
 </body>

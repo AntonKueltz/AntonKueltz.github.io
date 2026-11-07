@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="../styles.css">
+
   <title>Cryptopals Set 1</title>
 </head>
 
@@ -18,7 +20,7 @@
     cipher systems.
   </p>
 
-  <ul>
+  <ul id="toc">
     <li>
       <a href="#challenge-1">Challenge 1: Convert Hex to Base64</a>
     </li>
@@ -58,8 +60,7 @@
     calls from the standard library.
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   from base64 import b64encode
 
 
@@ -73,8 +74,7 @@
                  b'696b65206120706f69736f6e6f7573206d757368726f6f6d'
       b64_data = hex_to_b64(hex_data)
       print(b64_data.decode())
-    </code>
-  </pre>
+  </code></pre>
 
   <h3 id="challenge-2">Challenge 2: Fixed XOR</h3>
 
@@ -95,8 +95,7 @@
   concisely implement.
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   def xor(buf1: bytes, buf2: bytes) -> bytes:
       return bytes([b1 ^ b2 for (b1, b2) in zip(buf1, buf2)])
 
@@ -106,8 +105,7 @@
       right = bytes.fromhex(b'686974207468652062756c6c277320657965')
       xored = xor(left, right)
       print(xored.hex())
-    </code>
-  </pre>
+  </code></pre>
 
   <h3 id="challenge-3">Challenge 3: Single-byte XOR Cipher</h3>
 
@@ -147,8 +145,7 @@
     where n is the size of the key in bits.
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   def score(chars: bytes) -> int:
       points = 0
       most_freq_letters = b'etaoinhs'
@@ -187,8 +184,7 @@
       )
       ptxt = single_byte_cipher(ctxt)
       print(ptxt.decode())
-    </code>
-  </pre>
+  </code></pre>
 
   <h3 id="challenge-4">Challenge 4: Detect Single-character XOR</h3>
 
@@ -213,8 +209,7 @@
   </p>
 
 
-  <pre>
-    <code>
+  <pre><code>
   from challenge03 import score, single_byte_cipher
 
 
@@ -233,8 +228,7 @@
                   ptxt = txt
 
       print(ptxt.decode())
-    </code>
-  </pre>
+  </code></pre>
 
   <h3 id="challenge-5">Challenge 5: Implement Repeating-key XOR</h3>
 
@@ -245,13 +239,11 @@
     key to be the length of the plaintext and then xor the two together.
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   Burning `em
   |||||||||||
   ICEICEICEIC
-    </code>
-  </pre>
+  </code></pre>
 
   <p>
     We make this a little more efficient by noting that the corresponding key byte for a
@@ -259,8 +251,7 @@
     This is because the key repeats every <code>len(key)</code> bytes.
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   def repeating_key_xor(intxt: bytes, key: bytes) -> bytes:
       outtxt = []
 
@@ -277,8 +268,7 @@
       key = b'ICE'
       ctxt = repeating_key_xor(plaintext, key)
       print(ctxt.hex())
-    </code>
-  </pre>
+  </code></pre>
 
   <h3 id="challenge-6">Challenge 6: Break Repeating-key XOR</h3>
 
@@ -305,14 +295,12 @@
     output -
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   In [1]: from challenge06 import hamming_distance
 
   In [2]: hamming_distance(b'this is a test', b'wokka wokka!!!')
   Out[2]: 37
-    </code>
-  </pre>
+  </code></pre>
 
   <p>
     Next we need to figure out how long the key actually is. The problem
@@ -370,8 +358,7 @@
     always, will be our best candidate for the plaintext.
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   from base64 import b64decode
   from itertools import combinations
 
@@ -439,8 +426,7 @@
           data = b64decode(f.read().replace(b'\n', b''))
           text = break_repeating_key(data)
           print(text.decode())
-    </code>
-  </pre>
+  </code></pre>
 
   <h3 id="challenge-7">Challenge 7: AES in ECB Mode</h3>
 
@@ -538,8 +524,7 @@
   </p>
 
 
-  <pre>
-    <code>
+  <pre><code>
   from Crypto.Cipher import AES
 
 
@@ -566,8 +551,7 @@
       for ctxt in ctxts:
           if is_encrypted_in_ecb_mode(ctxt):
               print(ctxt.hex())
-    </code>
-  </pre>
+  </code></pre>
 
   <h4>Appendix</h4>
 
@@ -593,13 +577,12 @@
   </pre>
 
   <p>
-    In our case the range of possible values is all 128 bit numbers, so <code>n=2^<sup>128</sup></code>
+    In our case the range of possible values is all 128 bit numbers, so <code>n=2<sup>128</sup></code>
     possible values. If we have a <code>k=1000000</code> block plaintext then the probability of
     two equal ciphertext blocks would be
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   In [1]: n = 2**128
 
   In [2]: k = 1000000
@@ -608,18 +591,16 @@
 
   In [4]: reduce(lambda x, y: x * (y / n), range(n, n-k, -1), 1.0)
   Out[4]: 1.0
-    </code>
-  </pre>
+  </code></pre>
 
   <p>
     Python can't properly represent values this close to 1 due to floating point
-    representation limitations so let's reduce the possible values to <code>n=2^<sup>64</sup></code>, which 
-    is about <code>1.94 * 10<sup>19</sup></code> times smaller than <code>n=2^<sup>128</sup></code>. In this case the 
+    representation limitations so let's reduce the possible values to <code>n=2<sup>64</sup></code>, which 
+    is about <code>1.94 * 10<sup>19</sup></code> times smaller than <code>n=2<sup>128</sup></code>. In this case the 
     probability of no two equal blocks is
   </p>
 
-  <pre>
-    <code>
+  <pre><code>
   In [1]: n = 2**64
 
   In [2]: k = 1000000
@@ -628,12 +609,11 @@
 
   In [4]: reduce(lambda x, y: x * (y / n), range(n, n-k, -1), 1.0)
   Out[4]: 0.9999999728949818
-    </code>
-  </pre>
+  </code></pre>
 
   <p>
     This means the probability of there not being a collision in a ciphertext that
-    is a million blocks long, using a block cipher with a function image of size<code>n=2^<sup>64</sup></code>,
+    is a million blocks long, using a block cipher with a function image of size<code>n=2<sup>64</sup></code>,
     is 99.99999%. Now imagine how many more nines the probability has when we expand
     the function image size by a factor of <code>1.94 * 10<sup>19</sup></code>. Given how incomprehensibly
     unlikely this scenario is we do not take it into consideration for our approach
